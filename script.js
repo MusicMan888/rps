@@ -8,8 +8,8 @@ function getComputerChoice()
       out = x - frac; // subtract fractional part - result is integer
       
       // create choice 
-
-      if (out <= 33){
+      // dividing intergers (1 - 99) by 3 - assigning one choice to each 3rd 
+      if (out <= 33){ 
         choice = "paper";
       } else if (out <= 66){
         choice = "rock";
@@ -17,22 +17,23 @@ function getComputerChoice()
         choice = "scissors";
       }
 
-      console.log(choice);
-      alert ("The Computer Selects : " + choice);
+      // console.log(choice);
+      alert ("The Computer Selects : " + choice); // alert the player of the computer choice
       return choice;
     }
 
 
     function playRound(playerSelection, computerSelection){
-      console.log("playround")
+      // console.log("playround")
       let p1 = playerSelection;
-      console.log("P1 = "+p1);
+      // console.log("P1 = "+p1);
    
       let p2 = computerSelection;
-      console.log("P2 = "+p2)
+      // console.log("P2 = "+p2)
 
-      let winner = "";
-
+      let winner = ""; // the winner of the game
+      
+      // the rules - also alerting the player of the game result
       if(p1 === p2){
         console.log("Draw!");
         winner = "Draw!";
@@ -80,7 +81,7 @@ function getComputerChoice()
 
     function getPlayerChoice(){
       let choice = prompt("Choose Your Weapon : rock, paper or scissors");
-      console.log(choice);
+      // console.log(choice);
       if(choice.toLowerCase() === "rock"){
         return choice.toLowerCase();
       } else if(choice.toLowerCase() === "paper"){
@@ -89,7 +90,7 @@ function getComputerChoice()
         return choice.toLowerCase();
       } else {
         alert("Sorry, Try Again");
-    
+
       }
     }
 
@@ -97,22 +98,22 @@ function getComputerChoice()
     function playGame()
     {
 
-      console.log("playGame"); // diag
+      // console.log("playGame"); // diag
 
       const scoreBoard = []; //create score board array
      
       for(let cnt = 0; cnt < 5; cnt++)
       {
        
-          console.log(cnt); //diag
-          console.log("get choice 1")
+          // console.log(cnt); //diag
+          // console.log("get choice 1")
 
           let playerSelection = getPlayerChoice(); 
           
           while (playerSelection === undefined) // if player choice results in error
           {
-            console.log("data entry error"); //diag
-            console.log("get choice 2")
+            // console.log("data entry error"); //diag
+            // console.log("get choice 2")
 
             playerSelection = getPlayerChoice();
           } 
@@ -126,5 +127,5 @@ function getComputerChoice()
       return scoreBoard;
     }
     
-    playGame();
+    playGame(); // the game 
 
