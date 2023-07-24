@@ -10,9 +10,9 @@ function getComputerChoice()
       // create choice 
       // dividing intergers (1 - 99) by 3 - assigning one choice to each 3rd 
       if (out <= 33){ 
-        choice = "paper";
-      } else if (out <= 66){
         choice = "rock";
+      } else if (out <= 66){
+        choice = "paper";
       } else {
         choice = "scissors";
       }
