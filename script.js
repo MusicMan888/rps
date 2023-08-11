@@ -1,5 +1,56 @@
+
+
+// initially have play interface off screen 
+const h2 = document.querySelector('#h2');
+if (h2.parentNode){
+  h2.parentNode.removeChild(h2);
+}
+const rock = document.querySelector('#rock');
+if (rock.parentNode){
+  rock.parentNode.removeChild(rock);
+}
+const paper = document.querySelector('#paper');
+if (paper.parentNode){
+  paper.parentNode.removeChild(paper);
+}
+const scissors = document.querySelector('#scissors');
+if (scissors.parentNode){
+  scissors.parentNode.removeChild(scissors);
+}
+
+const start = document.querySelector('#start');
+
+start.addEventListener('click', ()=> {
+
+  const playScrn = document.querySelector('#play');
+  if (playScrn){
+    console.log(playScrn);
+    playScrn.appendChild(h2);
+  }
+
+  if (start.parentNode) {
+    start.parentNode.removeChild(start);
+
+  const btnDiv = document.querySelector('.playBtns')
+    if (btnDiv){
+      //h2.parentNode.insertBefore(h2, playBtns);
+      console.log(btnDiv);
+      btnDiv.appendChild(rock);
+      btnDiv.appendChild(paper);
+      btnDiv.appendChild(scissors);
+    
+  
+    }
+  }
+});
+
+
+
+
+
+
 // Rock Paper Scissors 
-function getComputerChoice()
+    function getComputerChoice()
     {
       let x =((Math.random()) * 100) // generate a random floating point #
       let out = 0;
@@ -24,12 +75,12 @@ function getComputerChoice()
 
 
     function playRound(playerSelection, computerSelection){
-      // console.log("playround")
+     console.log("playround")
       let p1 = playerSelection;
-      // console.log("P1 = "+p1);
+       console.log("P1 = "+p1);
    
       let p2 = computerSelection;
-      // console.log("P2 = "+p2)
+       console.log("P2 = "+p2)
 
       let winner = ""; // the winner of the game
       
@@ -78,42 +129,54 @@ function getComputerChoice()
       } 
 
     }
-
+    
     function getPlayerChoice(){
-      let choice = prompt("Choose Your Weapon : rock, paper or scissors");
-      // console.log(choice);
-      if(choice.toLowerCase() === "rock"){
-        return choice.toLowerCase();
-      } else if(choice.toLowerCase() === "paper"){
-        return choice.toLowerCase();
-      } else if(choice.toLowerCase() === "scissors"){
-        return choice.toLowerCase();
-      } else {
-        alert("Sorry, Try Again");
-
+      rock.addEventListener('click', ()=>{
+        // this will indicate players choice of rock
+        console.log('rock');
+        return "rock";
+      })
+      paper.addEventListener('click', ()=>{
+        // this will indicate players choice of paper
+        console.log("paper");
+         return "rock";
+      })
+      scissors.addEventListener('click', ()=>{
+        // this will indicate players choice of scissors
+        console.log("scissors");
+         return "scissors";
+      })
       }
-    }
-
-      // this will save winner results in an array and loop through 5 rounds
+  
+      // this will save winner results in an array - 1st player to reach 5 points
     function playGame()
     {
-
       // console.log("playGame"); // diag
-
       const scoreBoard = []; //create score board array
-     
-      for(let cnt = 0; cnt < 5; cnt++)
+      let p1 = 0;
+      let p2 = 0;
+      for (let cnt= 0; cnt < 20; cnt++)
       {
-       
-          // console.log(cnt); //diag
-          // console.log("get choice 1")
+        // first player to 5 wins
+        if (p1 > 4){ 
+          console.log ("p1");
+          console.log(scoreBoard);
+          return scoreBoard;
+        }else if (p2 > 4){
+          console.log ("p2");
+          console.log(scoreBoard);
+          return scoreBoard;
+        }
+        console.log(cnt); //diag
+        console.log("get choice 1")
 
-          let playerSelection = getPlayerChoice(); 
+        let playerSelection = getPlayerChoice(); 
+        console.log(playerSelection);
           
-          while (playerSelection === undefined) // if player choice results in error
+        while (playerSelection === undefined) // if   player choice results in error
           {
-            // console.log("data entry error"); //diag
-            // console.log("get choice 2")
+            console.log("data entry error"); //diag
+            console.log("get choice 2")
 
             playerSelection = getPlayerChoice();
           } 
@@ -121,11 +184,28 @@ function getComputerChoice()
           let computerSelection = getComputerChoice();
 
           scoreBoard[cnt] = playRound(playerSelection, computerSelection);
-      }
 
-      console.log(scoreBoard);
-      return scoreBoard;
+          if (scoreBoard[cnt] === "Player"){
+            console.log (scoreBoard[cnt]);
+            p1 ++;
+            console.log(p1)
+            continue;
+          } else if ((scoreBoard[cnt] === "Computer")){
+            console.log (scoreBoard[cnt]);
+            p2++;
+            console.log(p2)
+            continue;
+          } else{
+            continue;
+          }
+          //this works 08-09-2023
+
+      
+
+      
     }
-    
-    playGame(); // the game 
+  }
+  let result = getPlayerChoice();
+  console.log(result);
 
+  //playGame(); // the game
