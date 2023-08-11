@@ -49,7 +49,7 @@ start.addEventListener('click', ()=> {
 
 
 
-// Rock Paper Scissors 
+    // Rock Paper Scissors 
     function getComputerChoice()
     {
       let x =((Math.random()) * 100) // generate a random floating point #
@@ -131,81 +131,116 @@ start.addEventListener('click', ()=> {
     }
     
     function getPlayerChoice(){
+       console.log ("enter getPlayersChoice");
+
+      let playerSelection = "";
+      let computerSelection = "";
+
+      let scoreBoard = [];
+      let p1 = 0;
+      let p2 = 0;
+      cnt = 0;
+
+
       rock.addEventListener('click', ()=>{
         // this will indicate players choice of rock
         console.log('rock');
-        return "rock";
-      })
-      paper.addEventListener('click', ()=>{
-        // this will indicate players choice of paper
-        console.log("paper");
-         return "rock";
-      })
-      scissors.addEventListener('click', ()=>{
-        // this will indicate players choice of scissors
-        console.log("scissors");
-         return "scissors";
-      })
-      }
-  
-      // this will save winner results in an array - 1st player to reach 5 points
-    function playGame()
-    {
-      // console.log("playGame"); // diag
-      const scoreBoard = []; //create score board array
-      let p1 = 0;
-      let p2 = 0;
-      for (let cnt= 0; cnt < 20; cnt++)
-      {
-        // first player to 5 wins
-        if (p1 > 4){ 
-          console.log ("p1");
-          console.log(scoreBoard);
-          return scoreBoard;
-        }else if (p2 > 4){
-          console.log ("p2");
-          console.log(scoreBoard);
-          return scoreBoard;
-        }
-        console.log(cnt); //diag
-        console.log("get choice 1")
+        playerSelection = "rock";
+        computerSelection = getComputerChoice();
+        scoreBoard[cnt] = playRound(playerSelection, computerSelection);
 
-        let playerSelection = getPlayerChoice(); 
-        console.log(playerSelection);
-          
-        while (playerSelection === undefined) // if   player choice results in error
-          {
-            console.log("data entry error"); //diag
-            console.log("get choice 2")
-
-            playerSelection = getPlayerChoice();
-          } 
-
-          let computerSelection = getComputerChoice();
-
-          scoreBoard[cnt] = playRound(playerSelection, computerSelection);
-
-          if (scoreBoard[cnt] === "Player"){
-            console.log (scoreBoard[cnt]);
-            p1 ++;
-            console.log(p1)
-            continue;
-          } else if ((scoreBoard[cnt] === "Computer")){
+        if (scoreBoard[cnt] === "Player"){
+          console.log (scoreBoard[cnt]);
+          p1 ++;
+          console.log(p1)
+       } else if ((scoreBoard[cnt] === "Computer")){
             console.log (scoreBoard[cnt]);
             p2++;
             console.log(p2)
-            continue;
-          } else{
-            continue;
-          }
-          //this works 08-09-2023
+        } else { 
+        //draw - do nothing
+        }
+        console.log(cnt);
+        cnt ++;
 
-      
+     // first player to 5 wins
+        if (p1 > 4){ 
+          console.log ("player wins");
+          displayResults(scoreBoard);
+        }else if (p2 > 4){
+          console.log ("computer wins");
+          displayResults(scoreBoard);
+        }
+      })
 
-      
+      paper.addEventListener('click', ()=>{
+        // this will indicate players choice of paper
+        console.log("paper");
+        playerSelection = "paper";
+        computerSelection = getComputerChoice();
+         scoreBoard[cnt] = playRound(playerSelection, computerSelection);
+       if (scoreBoard[cnt] === "Player"){
+          console.log (scoreBoard[cnt]);
+          p1 ++;
+          console.log(p1)
+       } else if ((scoreBoard[cnt] === "Computer")){
+            console.log (scoreBoard[cnt]);
+            p2++;
+            console.log(p2)
+        } else { 
+        //draw - do nothing
+        }
+        console.log(cnt);
+        cnt ++;
+        
+          // first player to 5 wins
+        if (p1 > 4){ 
+          console.log ("player wins");
+          displayResults(scoreBoard);
+        }else if (p2 > 4){
+          console.log ("computer wins");
+          displayResults(scoreBoard);
+        }
+
+      })
+
+      scissors.addEventListener('click', ()=>{
+        // this will indicate players choice of scissors
+        console.log("scissors");
+        playerSelection = "scissors";
+        computerSelection = getComputerChoice();
+        scoreBoard[cnt] = playRound(playerSelection, computerSelection);
+
+      if (scoreBoard[cnt] === "Player"){
+          console.log (scoreBoard[cnt]);
+          p1 ++;
+          console.log(p1)
+       } else if ((scoreBoard[cnt] === "Computer")){
+            console.log (scoreBoard[cnt]);
+            p2++;
+            console.log(p2)
+        } else { 
+        //draw - do nothing
+        }
+        console.log(cnt);
+        cnt ++;
+        
+         // first player to 5 wins
+        if (p1 > 4){ 
+          console.log ("player wins");
+          displayResults(scoreBoard);
+        }else if (p2 > 4){
+          console.log ("computer wins");
+          displayResults(scoreBoard);
+        }
+      })
     }
-  }
-  let result = getPlayerChoice();
-  console.log(result);
+  
 
-  //playGame(); // the game
+      function displayResults(scoreBoard){
+        console.log(scoreBoard);
+        // this is where the results are displayed and the start new game will occure.
+      }
+
+getPlayerChoice();
+
