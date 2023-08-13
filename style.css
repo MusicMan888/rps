@@ -11,7 +11,9 @@ h1{
   color: #B23D28;
   text-shadow: 1px 1px black;
 }
-
+.msg{
+  text-align: center;
+}
 .imgContainer{
   display: flex;
   flex-direction: row;
