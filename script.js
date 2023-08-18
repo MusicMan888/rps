@@ -1,15 +1,24 @@
+
+
 let off = 1;
- // invisible
+ // Game buttons invisible - start button visible
 toggleButtons();
 toggleScore();
 
-console.log("Score Board -  Off");
-console.log("play buttons off");
+console.log("Score Board off");
+console.log("Play Buttons off");
 
 // initially have play interface off
 const plyr = document.querySelector('.plyrScore');
 const cmpr = document.querySelector('.cmprScore');
 const msg = document.querySelector('.msg');
+
+// global declarations
+  let ply1 = 0;
+  let ply2 = 0;
+ 
+
+
 
 // play buttons
 function toggleButtons(){
@@ -41,9 +50,37 @@ function toggleButtons(){
   }
 }
 
+function toggleButtonsOff(){
+
+  if (off) {
+    document.querySelector('#rock').style.visibility = "hidden";
+  }else{
+    document.querySelector('#rock').style.visibility = "visible";
+  }
+ 
+  if (off) {
+    document.querySelector('#paper').style.visibility = "hidden";
+  }else{
+    document.querySelector('#paper').style.visibility = "visible";
+  }
+
+  if (off) {
+    document.querySelector('#scissors').style.visibility = "hidden";
+  }else{
+    document.querySelector('#scissors').style.visibility = "visible";
+  }
+
+  // Start New Game button = OFF
+
+  if (off) {
+    document.querySelector('#start').style.visibility = "hidden";
+  }else{
+    document.querySelector('#start').style.visibility = "visible";
+  }
+}
 
 function toggleScore(){
-// toggle off scoreboard
+// toggle off score display - message display
 
   if (off) {
     document.querySelector('.plyrScore').style.visibility = "hidden";
@@ -64,27 +101,215 @@ function toggleScore(){
   }
 }
 
-
+//========================================= 
 
 const start = document.querySelector('#start');
 start.addEventListener('click', ()=> {
-
+  console.log("============");
   console.log("click Start");
-  console.log("Toggle Score Board On");
+
+  console.log("Toggle Score-message board On");
   
   off = 0;
-  toggleButtons();
-  toggleScore();
+   // Game buttons visible - start button invisible
+  toggleButtons(); // switch buttons
+  toggleScore(); // turn on score
 
   const h1 = document.querySelector('h1');
   if (h1){
     h1.innerText = "Choose Your Weapon"
   }
+  
+  console.log("clear message display");
   message = "";
   displayMsg(message);
 
   getPlayerChoice();
 });
+
+//=========================================   
+
+function getPlayerChoice(){
+
+  console.log ("enter getPlayersChoice");
+
+  let playerSelection = "";
+  let computerSelection = "";
+  
+  let win = "";
+  let message = "";
+
+  ply1 = 0;
+  ply2 = 0;
+
+  updateScore(ply1, ply2);
+
+
+  rock.addEventListener('click', ()=>{
+    // this will indicate players choice of rock
+    console.log("============");
+    console.log("Player Chose Rock");
+
+
+    playerSelection = "rock";
+    computerSelection = getComputerChoice();
+    win = playRound(playerSelection, computerSelection);
+
+    if (win === "Player"){
+    
+      ply1 ++;
+      win = "";
+      updateScore(ply1,ply2);
+
+
+    } else if (win === "Computer"){
+
+      ply2++;
+      win = "";
+      updateScore(ply1,ply2);
+      
+    } else if (win === "Draw!"){
+      updateScore(ply1,ply2);
+    } else {
+      alert ("Error - no result getPlayerChoice - rock");
+    }
+
+    // first player to 5 wins
+    if (ply1 > 4){ 
+
+      console.log ("player wins");
+
+      message = "Player Wins!"
+      setTimeout(() =>{displayMsg(message);;}, 3000);
+ 
+      win="";
+
+      startOver();
+
+    }else if (ply2 > 4){
+
+      console.log ("computer wins");
+      
+      message = "Computer Wins!"
+     
+      setTimeout(() =>{displayMsg(message);;}, 3000);
+  
+      win="";
+   
+      startOver();
+      
+    }
+  })
+
+  paper.addEventListener('click', ()=>{
+    // this will indicate players choice of paper
+    console.log("============");
+    console.log("player chose paper");
+    
+    playerSelection = "paper";
+    computerSelection = getComputerChoice();
+    win = playRound(playerSelection, computerSelection);
+        
+    if (win === "Player"){
+
+      ply1 ++;
+      win = "";
+      updateScore(ply1,ply2);
+
+    } else if (win === "Computer"){
+
+      ply2++;
+      win = "";
+      updateScore(ply1,ply2);
+
+    } else if (win === "Draw!"){
+      updateScore(ply1,ply2);
+    } else {
+      alert ("Error - no result getPlayerChoice - paper");
+    }
+
+     
+      // first player to 5 wins
+    if (ply1 > 4){ 
+
+      console.log ("player wins");
+          
+      message = "Player Wins!"
+     
+      setTimeout(() =>{displayMsg(message);;}, 3000);
+   
+      win="";
+
+      startOver();
+
+    }else if (ply2 > 4){
+
+      console.log ("computer wins");
+          
+      message = "Computer Wins!"
+      setTimeout(() =>{displayMsg(message);;}, 3000);
+
+      win="";
+    
+      startOver();
+    }
+
+  })
+
+  scissors.addEventListener('click', ()=>{
+    // this will indicate players choice of scissors
+    console.log("============");
+    console.log("player chose scissors");
+  
+    playerSelection = "scissors";
+    computerSelection = getComputerChoice();
+    win = playRound(playerSelection, computerSelection);
+        
+
+    if (win === "Player"){
+     
+      ply1 ++;
+      win = "";
+      updateScore(ply1,ply2);
+
+    } else if (win === "Computer"){
+      
+      ply2++;
+      win = "";
+      updateScore(ply1,ply2);
+
+    } else if (win === "Draw!"){
+      updateScore(ply1,ply2);
+    } else {
+      alert ("Error - no result getPlayerChoice - scissors");
+    }
+  
+      // first player to 5 wins
+    if (ply1 > 4){ 
+
+      console.log ("Player wins");
+
+      message = "Player Wins!";
+      setTimeout(() =>{displayMsg(message);;}, 3000);
+
+      win="";
+  
+      startOver();
+
+    }else if (ply2 > 4){
+
+      console.log ("Computer wins");
+      
+      message = "Computer Wins!"
+      setTimeout(() =>{displayMsg(message);;}, 3000);
+
+      win="";
+
+      startOver();
+    }
+  })
+}
+//=========================================    
 
 // Rock Paper Scissors 
 function getComputerChoice()
@@ -101,14 +326,14 @@ function getComputerChoice()
   // dividing intergers (1 - 99) by 3 - assigning one choice to each 3rd 
   if (out <= 33){ 
     choice = "rock";
-    message = "The Computer Selects : Rock"
+    message = "The Computer Chose Rock"
     displayMsg(message);
   } else if (out <= 66){
     choice = "paper";
-    message = "The Computer Selects : Paper"
+    message = "The Computer Chose Paper"
   } else {
     choice = "scissors";
-    message = "The Computer Selects : Scissors"
+    message = "The Computer Chose Scissors"
   }
 
   // status display
@@ -119,10 +344,12 @@ function getComputerChoice()
   return choice;
 }
 
+//=========================================    
 
 function playRound(playerSelection, computerSelection){
 
   console.log("playround")
+
    
   let p1 = playerSelection;
 
@@ -135,269 +362,130 @@ function playRound(playerSelection, computerSelection){
 
   let winner = ""; // the winner of the game
   let message = ""; // status display
+
   // the rules - also alerting the player of the game result
   if(p1 === p2){
 
-    console.log("Draw!");
-
     winner = "Draw!";
 
+    console.log("playround winner = "+ winner);
+        
     message = "Draw!";
+    
     setTimeout(() =>{displayMsg(message);;}, 2000);
+
     return winner;
+
   } else if(p1 === "paper" && p2 === "rock"){    
 
     console.log("You Win! Paper Covers Rock");
   
     message = "You Win! Paper Covers Rock";
+    
     setTimeout(() =>{displayMsg(message);;}, 2000);
+
     winner = "Player";
 
-    console.log(winner);
+    console.log("playround winner = "+ winner);
 
     return winner;
+
   } else if(p1 === "rock" && p2 === "scissors"){
 
     console.log("You Win! Rock Smashes Scissors");
 
     message = "You Win! Rock Smashes Scissors";
+   
     setTimeout(() =>{displayMsg(message);;}, 2000);
+
     winner = "Player";
 
-    console.log(winner);
+    console.log("playround winner = "+ winner);
 
     return winner;
+
   }else if(p1 === "scissors" && p2 === "paper"){
 
     console.log("You Win! Scissors Cuts Paper");
 
     message = "You Win! Scissors Cuts Paper";
+ 
     setTimeout(() =>{displayMsg(message);;}, 2000);
+
     winner = "Player";
 
-    console.log(winner);
+    console.log("playround winner = "+ winner);
 
     return winner;
+
   } else if(p1 === "rock" && p2 === "paper"){
 
     console.log("You Lose! Paper Covers Rock");
    
     message = "You Lose! Paper Covers Rock";
-    setTimeout(() =>{displayMsg(message);;}, 2000);
-     winner = "Computer";
 
-    console.log(winner);
+    setTimeout(() =>{displayMsg(message);;}, 2000);
+
+    winner = "Computer";
+
+    console.log("playround winner = "+ winner);
     
     return winner;
+
   } else if(p1 === "scissors" && p2 === "rock"){
 
     console.log("You Lose! Rock Smashes Scissors");
     
     message = "You Lose! Rock Smashes Scissors";
-    setTimeout(() =>{displayMsg(message);;}, 2000);
-    winner = "Computer";
-
-    console.log(winner);
     
+    setTimeout(() =>{displayMsg(message);;}, 2000);
+
+    winner = "Computer";
+    
+    console.log("playround winner = "+ winner);
+
     return winner;
+
   } else if(p1 === "paper" && p2 === "scissors"){
 
     console.log("You Lose! Scissors Cuts Paper");
 
     message = "You Lose! Scissors Cuts Paper";
+  
     setTimeout(() =>{displayMsg(message);;}, 2000);
+    
     winner = "Computer";
 
-    console.log(winner);
+    console.log("playround winner = "+ winner);
 
     return winner;
   } 
-
 }
-    
-function getPlayerChoice(){
 
-  console.log ("enter getPlayersChoice");
+function updateScore(ply1, ply2){
+  console.log("update score function");
 
-  let playerSelection = "";
-  let computerSelection = "";
-  let message = "";
+  console.log("Player = " + ply1);
+  console.log("Computer = " + ply2);
   
-  // initialize scoreboard
-  let scoreBoard = [];
-  let p1 = 0;
-  let p2 = 0;
-  cnt = 0;
-  updateScore(p1, p2);
-
-
-  rock.addEventListener('click', ()=>{
-    // this will indicate players choice of rock
-    playerSelection = "rock";
-    computerSelection = getComputerChoice();
-    scoreBoard[cnt] = playRound(playerSelection, computerSelection);
-
-    if (scoreBoard[cnt] === "Player"){
-      //console.log (scoreBoard[cnt]);
-      p1 ++;
-
-      console.log(p1)
-
-      updateScore(p1,p2);
-    } else if ((scoreBoard[cnt] === "Computer")){
-
-      console.log (scoreBoard[cnt]);
-
-      p2++;
-
-      console.log(p2);
-      
-      updateScore(p1,p2);
-    } else { 
-        //draw - do nothing
-    }
-
-    console.log(cnt);
-
-    cnt ++;
-
-    // first player to 5 wins
-    if (p1 > 4){ 
-
-      console.log ("player wins");
-
-      message = "Player Wins!"
-      setTimeout(() =>{displayMsg(message);;}, 3000);
-      displayResults(scoreBoard);
-    }else if (p2 > 4){
-
-      console.log ("computer wins");
-      
-      message = "Computer Wins!"
-      setTimeout(() =>{displayMsg(message);;}, 3000);
-      displayResults(scoreBoard);
-    }
-  })
-
-  paper.addEventListener('click', ()=>{
-    // this will indicate players choice of paper
-        playerSelection = "paper";
-        computerSelection = getComputerChoice();
-         scoreBoard[cnt] = playRound(playerSelection, computerSelection);
-       if (scoreBoard[cnt] === "Player"){
-
-          console.log (scoreBoard[cnt]);
-
-          p1 ++;
-
-          console.log(p1);
-
-          updateScore(p1,p2);
-       } else if ((scoreBoard[cnt] === "Computer")){
-
-            console.log (scoreBoard[cnt]);
-         
-            p2++;
-
-            console.log(p2);
-
-            updateScore(p1,p2);
-        } else { 
-        //draw - do nothing
-        }
-
-        console.log(cnt);
-        
-        cnt ++;
-        
-          // first player to 5 wins
-        if (p1 > 4){ 
-
-          console.log ("player wins");
-          
-          message = "Player Wins!"
-          setTimeout(() =>{displayMsg(message);;}, 3000);
-          displayResults(scoreBoard);
-        }else if (p2 > 4){
-
-          console.log ("computer wins");
-          
-          message = "Computer Wins!"
-          setTimeout(() =>{displayMsg(message);;}, 3000);
-          displayResults(scoreBoard);
-        }
-
-  })
-
-  scissors.addEventListener('click', ()=>{
-    // this will indicate players choice of scissors
-    playerSelection = "scissors";
-    computerSelection = getComputerChoice();
-    scoreBoard[cnt] = playRound(playerSelection, computerSelection);
-
-    if (scoreBoard[cnt] === "Player"){
-      console.log (scoreBoard[cnt]);
-      p1 ++;
-
-      console.log(p1);
-
-      updateScore(p1,p2);
-    } else if ((scoreBoard[cnt] === "Computer")){
-      console.log (scoreBoard[cnt]);
-      p2++;
-
-      console.log(p2);
-      updateScore(p1,p2);
-    } else { 
-      //draw - do nothing
-    }
-
-      console.log(cnt);
-
-      cnt ++;
-
-      // first player to 5 wins
-    if (p1 > 4){ 
-
-      console.log ("Player wins");
-
-      message = "Player Wins!"
-      setTimeout(() =>{displayMsg(message);;}, 3000);
-      displayResults(scoreBoard);
-    }else if (p2 > 4){
-
-      console.log ("Computer wins");
-      
-      message = "Computer Wins!"
-      setTimeout(() =>{displayMsg(message);;}, 3000);
-      displayResults(scoreBoard);
-    }
-  })
-}
-function updateScore(p1, p2){
-
-  console.log("update scoreboard displays");
-  
-  plyr.textContent = "Player = " + p1;
-  cmpr.textContent = "Computer = " + p2;
+  plyr.textContent = "Player = " + ply1;
+  cmpr.textContent = "Computer = " + ply2;
 }
 
 function displayMsg(message){
-
-  console.log("display gameplay message");
-  
+  //console.log("display gameplay message - displayMsg");
   msg.textContent = message;
 }
 
 
-      function displayResults(scoreBoard){
-        off = 1;
-        toggleButtons();
+function startOver(){
+  console.log("toggleButtonsOff()");
+  off = 1;
+  toggleButtonsOff();
 
-        console.log("toggleButtons()");
-        console.log(scoreBoard);
-        
-      }
+  console.log("Restart");
+  setTimeout(() =>{location.reload();;}, 7000);
+}
 
 
 
