@@ -10,15 +10,17 @@ console.log("Play Buttons off");
 
 // initially have play interface off
 const plyr = document.querySelector('.plyrScore');
+const plyCh = document.querySelector('.plyrChoice');
 const cmpr = document.querySelector('.cmprScore');
+const cmpCh = document.querySelector('.cmprChoice');
 const msg = document.querySelector('.msg');
 
 // global declarations
   let ply1 = 0;
   let ply2 = 0;
- 
 
-
+  plyCh.textContent = "";
+  cmpCh.textContent = "";
 
 // play buttons
 function toggleButtons(){
@@ -68,8 +70,23 @@ function toggleButtonsOff(){
     document.querySelector('#scissors').style.visibility = "hidden";
   }else{
     document.querySelector('#scissors').style.visibility = "visible";
+
   }
 
+  function toggleChoice(){
+
+    if (off) {
+      document.querySelector('.plyrChoice').style.visibility = "hidden";
+    }else{
+      document.querySelector('.plyrChoice').style.visibility = "visible";
+    }
+   
+    if (off) {
+      document.querySelector('.cmprChoice').style.visibility = "hidden";
+    }else{
+      document.querySelector('.cmprChoice').style.visibility = "visible";
+    }
+  }
   // Start New Game button = OFF
 
   if (off) {
@@ -87,7 +104,7 @@ function toggleScore(){
   }else{
     document.querySelector('.plyrScore').style.visibility = "visible";
   }
-
+  
   if (off) {
     document.querySelector('.msg').style.visibility = "hidden";
   }else{
@@ -138,6 +155,7 @@ function getPlayerChoice(){
   
   let win = "";
   let message = "";
+  //displayMsg(message);
 
   ply1 = 0;
   ply2 = 0;
@@ -152,7 +170,11 @@ function getPlayerChoice(){
 
 
     playerSelection = "rock";
+    displayPlyrChoice(playerSelection);
+
     computerSelection = getComputerChoice();
+    displayCmprrChoice(computerSelection);
+
     win = playRound(playerSelection, computerSelection);
 
     if (win === "Player"){
@@ -207,7 +229,11 @@ function getPlayerChoice(){
     console.log("player chose paper");
     
     playerSelection = "paper";
+    displayPlyrChoice(playerSelection);
+
     computerSelection = getComputerChoice();
+    displayCmprrChoice(computerSelection);
+
     win = playRound(playerSelection, computerSelection);
         
     if (win === "Player"){
@@ -262,10 +288,13 @@ function getPlayerChoice(){
     console.log("player chose scissors");
   
     playerSelection = "scissors";
+    displayPlyrChoice(playerSelection);
+
     computerSelection = getComputerChoice();
+    displayCmprrChoice(computerSelection);
+
     win = playRound(playerSelection, computerSelection);
         
-
     if (win === "Player"){
      
       ply1 ++;
@@ -471,6 +500,18 @@ function updateScore(ply1, ply2){
   plyr.textContent = "Player = " + ply1;
   cmpr.textContent = "Computer = " + ply2;
 }
+
+
+function displayPlyrChoice(playerSelection){
+  console.log("display playerChoice");
+  plyCh.textContent = playerSelection;
+}
+
+function displayCmprrChoice(computerSelection){
+  console.log("display computerChoice");
+  cmpCh.textContent = computerSelection;
+}
+
 
 function displayMsg(message){
   //console.log("display gameplay message - displayMsg");
