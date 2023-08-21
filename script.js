@@ -354,15 +354,15 @@ function getComputerChoice()
   // create choice 
   // dividing intergers (1 - 99) by 3 - assigning one choice to each 3rd 
   if (out <= 33){ 
-    choice = "rock";
-    message = "The Computer Chose Rock"
-    displayMsg(message);
-  } else if (out <= 66){
     choice = "paper";
     message = "The Computer Chose Paper"
-  } else {
+    displayMsg(message);
+  } else if (out <= 66){
     choice = "scissors";
     message = "The Computer Chose Scissors"
+  } else {
+    choice = "rock";
+    message = "The Computer Chose Rock"
   }
 
   // status display
